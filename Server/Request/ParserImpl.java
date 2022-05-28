@@ -15,9 +15,10 @@ public class ParserImpl implements HttpRequestParser{
         String requestHeader = readHeader(reader);
         HttpRequestHeader header=new HttpRequestHeader(requestHeader);
         String length = header.getAttribute("Content-Length");
-        if(length==null){
+        if("post".equals(header.getMethod().toLowerCase())&&length==null){
             throw new BadRequest(header.getVersion());
         }
+        if(length==null) length="0";
         return new HttpRequest(header, new String(reader.readNBytes(Integer.parseInt(length))));
     }
 

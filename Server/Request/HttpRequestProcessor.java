@@ -5,5 +5,5 @@ import Server.Model.Content;
 import java.io.*;
 
 public interface HttpRequestProcessor {
-    Content processRequest(HttpRequest request) throws FileNotFoundException;
+    Content processRequest(HttpRequest request) throws IOException;
 }

@@ -29,7 +29,7 @@ public class HttpHandler implements Runnable{
             Content data= processor.processRequest(request);
             response = builder.build(data, HttpResponseBuilder.OK,request.getHeader().getVersion());
         } catch (BadRequest e) {
-            response= builder.build(HttpResponseBuilder.NOT_FOUND,e.getVersion());
+            response= builder.build(HttpResponseBuilder.BAD_REQUEST,e.getVersion());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             response= builder.build(HttpResponseBuilder.NOT_FOUND,request.getHeader().getVersion());

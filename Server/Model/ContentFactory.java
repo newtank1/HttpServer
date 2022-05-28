@@ -3,7 +3,7 @@ package Server.Model;
 import java.io.*;
 
 public class ContentFactory {
-    Content createContent(String url) throws IOException {
+    public Content createContent(String url) throws IOException {
         InputStream inputStream=new DataInputStream(new FileInputStream(url));
         byte[] bytes = inputStream.readAllBytes();
         if(url.endsWith(".txt")){

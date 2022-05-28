@@ -1,7 +1,6 @@
 package Server.Request;
 
 import Server.Exceptions.BadRequest;
-import Server.Exceptions.HttpException;
 
 import java.io.IOException;
 import java.net.Socket;

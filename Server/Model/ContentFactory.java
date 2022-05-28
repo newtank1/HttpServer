@@ -1,11 +1,14 @@
 package Server.Model;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.GZIPInputStream;
 
 public class ContentFactory {
     public Content createContent(String url) throws IOException {
-        InputStream inputStream=new DataInputStream(new FileInputStream(url));
-        byte[] bytes = inputStream.readAllBytes();
+        InputStream bytes=new DataInputStream(new FileInputStream(url));
         if(url.endsWith(".txt")){
             return new Content("text/plain",bytes);
         }
@@ -20,6 +23,9 @@ public class ContentFactory {
         }
         if(url.endsWith(".png")){
             return new Content("image/png",bytes);
+        }
+        if(url.endsWith(".ico")){
+            return new Content("image/x-icon",bytes);
         }
         return null;
     }

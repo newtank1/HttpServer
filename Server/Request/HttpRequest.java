@@ -1,7 +1,5 @@
 package Server.Request;
 
-import lombok.Getter;
-
 public class HttpRequest {
     public static final String CRLF="\r\n";
     private final HttpRequestHeader header;

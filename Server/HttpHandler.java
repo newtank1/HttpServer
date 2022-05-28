@@ -1,21 +1,21 @@
 package Server;
 
 import Server.Exceptions.BadRequest;
-import Server.Exceptions.HttpException;
+import Server.Model.Content;
 import Server.Request.*;
 import Server.Response.*;
-import Server.Model.Content;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.Socket;
 
 public class HttpHandler implements Runnable{
-    public final String CRLF="\r\n";
+
     Socket socket;
-    private HttpRequestParser parser=new ParserImpl();
-    private HttpRequestProcessor processor=new ProcessorImpl();
-    private HttpResponseBuilder builder=new BuilderImpl();
-    private HttpResponseSender sender=new SenderImpl();
+    private final HttpRequestParser parser=new ParserImpl();
+    private final HttpRequestProcessor processor=new ProcessorImpl();
+    private final HttpResponseBuilder builder=new BuilderImpl();
+    private final HttpResponseSender sender=new SenderImpl();
 
     public HttpHandler(Socket socket) {
         this.socket = socket;

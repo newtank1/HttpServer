@@ -3,7 +3,6 @@ package Server.Request;
 import Server.Model.Content;
 import Server.Model.ContentFactory;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ProcessorImpl implements HttpRequestProcessor{

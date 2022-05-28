@@ -1,10 +1,13 @@
 package Server.Model;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Content {
     public String type;
-    public byte[] data;
+    public InputStream data;
 
-    public Content(String type, byte[] data) {
+    public Content(String type, InputStream data) {
         this.type = type;
         this.data = data;
     }
@@ -14,12 +17,19 @@ public class Content {
     }
 
 
-    public String getData() {
-        return new String(data);
+    public byte[] readData() throws IOException {
+        return readData(4096);
     }
 
-
-    public int getLength() {
-        return data.length;
+    public byte[] readData(int len) throws IOException {
+        return data.readNBytes(len);
+    }
+    public int getLength(){
+        try {
+            return data.available();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

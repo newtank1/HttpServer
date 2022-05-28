@@ -1,12 +1,11 @@
 package Server.Request;
 
 import Server.Exceptions.BadRequest;
-import Server.Exceptions.HttpException;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
 
 public class ParserImpl implements HttpRequestParser{
     @Override
@@ -15,7 +14,7 @@ public class ParserImpl implements HttpRequestParser{
         String requestHeader = readHeader(reader);
         HttpRequestHeader header=new HttpRequestHeader(requestHeader);
         String length = header.getAttribute("Content-Length");
-        if("post".equals(header.getMethod().toLowerCase())&&length==null){
+        if("post".equalsIgnoreCase(header.getMethod())&&length==null){
             throw new BadRequest(header.getVersion());
         }
         if(length==null) length="0";

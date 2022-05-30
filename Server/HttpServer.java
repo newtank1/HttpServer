@@ -21,14 +21,23 @@ package Server;//import java.io.BufferedInputStream;
 //    }
 //}
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public final class HttpServer {
-    public static void main(String argv[]) throws Exception {
-        // Get the port number from the command line.
-        int port = 20000;
+    public static Map<String,String> config;
+
+    public static void main(String[] argv) throws Exception {
+        // Get the port number from the config.
+        int port = Integer.parseInt(config.getOrDefault("Port","80"));
+
 
         // Establish the listen socket.
         ServerSocket socket = new ServerSocket(port);
@@ -46,6 +55,20 @@ public final class HttpServer {
 
             // Start the thread.
             thread.start();
+        }
+    }
+
+    static {
+        try {
+            BufferedReader reader=new BufferedReader(new InputStreamReader(new FileInputStream("Config.txt")));
+            String s;
+            config=new HashMap<>();
+            while ((s= reader.readLine())!=null){
+                String[] strs=s.split(":",2);
+                config.put(strs[0],strs[1]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

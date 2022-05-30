@@ -14,6 +14,7 @@ public class HttpResponseHeader {
         put(200,"OK");
         put(404,"NOT FOUND");
         put(400,"BAD REQUEST");
+        put(405,"UNSUPPORTED METHOD");
         put(500,"SERVER ERROR");
     }};
 
@@ -23,7 +24,11 @@ public class HttpResponseHeader {
         status=statusMap.get(statusCode);
     }
 
-    public void putAttribute(String key,String value){
+    public HttpResponseHeader(String version) {
+        this.version = version;
+    }
+
+    public void putAttribute(String key, String value){
         attributes.put(key,value);
     }
 
@@ -40,5 +45,9 @@ public class HttpResponseHeader {
     public void setStatus(int statusCode){
         this.statusCode = statusCode;
         status=statusMap.get(statusCode);
+    }
+
+    public int getStatus() {
+        return statusCode;
     }
 }

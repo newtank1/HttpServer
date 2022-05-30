@@ -15,22 +15,24 @@ public class HttpResponse {
         this.data = data;
     }
 
-    public HttpResponse(){
-
+    public HttpResponse(String version){
+        header=new HttpResponseHeader(version);
     }
 
     public byte[] getDataBytes(){
         byte[] headerBytes= (header.toString() + CRLF + CRLF).getBytes();
         byte[] bytes=new byte[0];
-        try {
-            bytes=new byte[data.getLength()];
-            int read=bytes.length;
-            while (read>0) {
-                bytes = data.readData(read);
-                read-=read;
+        if(data!=null) {
+            try {
+                bytes = new byte[data.getLength()];
+                int read = bytes.length;
+                while (read > 0) {
+                    bytes = data.readData(read);
+                    read -= read;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }catch (IOException e){
-            e.printStackTrace();
         }
         byte[] ret=new byte[headerBytes.length+bytes.length];
         System.arraycopy(headerBytes,0,ret,0,headerBytes.length);
@@ -44,6 +46,16 @@ public class HttpResponse {
 
     public void setAttribute(String key,String value){
         header.putAttribute(key, value);
+    }
+
+    public void setData(Content content){
+        data=content;
+        setAttribute("Content-Length", String.valueOf(data.getLength()));
+        setAttribute("Content-Type", data.getType());
+    }
+
+    public int getStatus(){
+        return header.getStatus();
     }
 
     @Override

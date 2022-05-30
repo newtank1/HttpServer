@@ -7,6 +7,7 @@ public interface HttpResponseBuilder {
     int NOT_FOUND=404;
     int SERVER_ERROR=500;
     int BAD_REQUEST=400;
+    int UNSUPPORTED_METHOD=405;
 
     HttpResponse build(StreamContent data, int status, String version);
 

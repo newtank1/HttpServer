@@ -8,6 +8,14 @@ public class HttpRequest {
     public HttpRequest(HttpRequestHeader header, String data) {
         this.header = header;
         this.data = data;
+
+        if("post".equalsIgnoreCase(getMethod())){
+            String[] params=data.split("&");
+            for (String param : params) {
+                String[] kv=param.split("=");
+                header.putParam(kv[0],kv[1]);
+            }
+        }
     }
 
     public HttpRequestHeader getHeader() {
@@ -28,6 +36,10 @@ public class HttpRequest {
 
     public String getVersion() {
         return header.getVersion();
+    }
+
+    public String getParam(String key){
+        return header.getParam(key);
     }
 
     @Override

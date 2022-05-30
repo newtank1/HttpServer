@@ -9,13 +9,23 @@ public class HttpRequestHeader {
     private final String uri;
     private final String version;
     private final Map<String,String> attributes=new HashMap<>();
+    private final Map<String,String> params=new HashMap<>();
 
     public HttpRequestHeader(String header){
         String[] lines=header.split(HttpRequest.CRLF);
         String requestLine=lines[0];
         String[] s = requestLine.split(" ");
         method= s[0];
-        uri= s[1];
+        String[] uriParams=s[1].split("\\?",2);
+        uri=uriParams[0];
+        if("get".equalsIgnoreCase(method)&&uriParams.length>1) {
+            String par = uriParams[1];
+            String[] pars = par.split("&");
+            for (String value : pars) {
+                String[] param = value.split("=");
+                params.put(param[0], param[1]);
+            }
+        }
         version= s[2];
         for(int i=1;i< lines.length;i++){
             String[] attr=lines[i].split(":");
@@ -41,6 +51,14 @@ public class HttpRequestHeader {
 
     public String getAttribute(String key){
         return attributes.getOrDefault(key.toLowerCase(),null);
+    }
+
+    protected void putParam(String key,String value){
+        params.put(key, value);
+    }
+
+    protected String getParam(String key){
+        return params.get(key);
     }
 
     public String toString(){

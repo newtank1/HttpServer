@@ -6,6 +6,10 @@ import java.nio.charset.StandardCharsets;
 public class TextContent extends Content{
     String text;
 
+    public TextContent(String text) {
+        this.text = text;
+    }
+
     @Override
     public int getLength() {
         return text.getBytes(StandardCharsets.UTF_8).length;
@@ -25,5 +29,8 @@ public class TextContent extends Content{
         byte[] ret=new byte[len];
         System.arraycopy(bytes,0,ret,0,len);
         return ret;
+    }
+    public String getType() {
+        return "text/plain";
     }
 }

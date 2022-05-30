@@ -1,6 +1,6 @@
 package Server.Response;
 
-import Server.Model.Content;
+import Server.Model.StreamContent;
 
 public interface HttpResponseBuilder {
     int OK=200;
@@ -8,7 +8,7 @@ public interface HttpResponseBuilder {
     int SERVER_ERROR=500;
     int BAD_REQUEST=400;
 
-    HttpResponse build(Content data, int status, String version);
+    HttpResponse build(StreamContent data, int status, String version);
 
     HttpResponse build(int status,String version);
 }

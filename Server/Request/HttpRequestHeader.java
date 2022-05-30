@@ -42,4 +42,14 @@ public class HttpRequestHeader {
     public String getAttribute(String key){
         return attributes.getOrDefault(key.toLowerCase(),null);
     }
+
+    public String toString(){
+        StringBuilder sb=new StringBuilder();
+        sb.append(method).append(" ").append(uri).append(" ").append(version).append(HttpRequest.CRLF);
+        for (String s : attributes.keySet()) {
+            sb.append(s).append(":").append(attributes.get(s)).append(HttpRequest.CRLF);
+        }
+        sb.append(HttpRequest.CRLF);
+        return sb.toString();
+    }
 }

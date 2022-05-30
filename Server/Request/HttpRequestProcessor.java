@@ -1,9 +1,9 @@
 package Server.Request;
 
-import Server.Model.Content;
+import Server.Model.StreamContent;
 
 import java.io.IOException;
 
 public interface HttpRequestProcessor {
-    Content processRequest(HttpRequest request) throws IOException;
+    StreamContent processRequest(HttpRequest request) throws IOException;
 }

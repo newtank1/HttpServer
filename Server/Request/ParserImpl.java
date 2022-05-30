@@ -21,10 +21,14 @@ public class ParserImpl implements HttpRequestParser{
         return new HttpRequest(header, new String(reader.readNBytes(Integer.parseInt(length))));
     }
 
-    private String readHeader(InputStream inputStream) throws IOException {
+    private String readHeader(InputStream inputStream) throws IOException, BadRequest {
         StringBuilder bytes=new StringBuilder();
         while (bytes.length()<4||!CRLFCRLF.equals(bytes.substring(bytes.length()-4,bytes.length()))){
             bytes.append((char) inputStream.read());
+            if(bytes.length()>8192) {
+                HttpRequestHeader header=new HttpRequestHeader(bytes.toString());
+                throw new BadRequest(header.getVersion());
+            }
         }
         return bytes.toString();
     }

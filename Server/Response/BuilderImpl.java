@@ -1,11 +1,11 @@
 package Server.Response;
 
-import Server.Model.Content;
+import Server.Model.StreamContent;
 
 public class BuilderImpl implements HttpResponseBuilder{
 
     @Override
-    public HttpResponse build(Content data, int status, String version) {
+    public HttpResponse build(StreamContent data, int status, String version) {
         HttpResponseHeader header=new HttpResponseHeader(version,status);
         HttpResponse response=new HttpResponse(header,data);
         if (data != null) {

@@ -17,4 +17,25 @@ public class HttpRequest {
     public String getData() {
         return data;
     }
+
+    public String getMethod() {
+        return header.getMethod();
+    }
+
+    public String getUri() {
+        return header.getUri();
+    }
+
+    public String getVersion() {
+        return header.getVersion();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb=new StringBuilder();
+        sb.append(header.toString());
+        if(data!=null) sb.append(data);
+        return sb.toString();
+    }
+
 }

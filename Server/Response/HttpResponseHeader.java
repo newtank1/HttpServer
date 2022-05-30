@@ -36,4 +36,9 @@ public class HttpResponseHeader {
         }
         return stringJoiner.toString();
     }
+
+    public void setStatus(int statusCode){
+        this.statusCode = statusCode;
+        status=statusMap.get(statusCode);
+    }
 }

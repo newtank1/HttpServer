@@ -1,7 +1,7 @@
 package Server;
 
 import Server.Exceptions.BadRequest;
-import Server.Model.Content;
+import Server.Model.StreamContent;
 import Server.Request.*;
 import Server.Response.*;
 
@@ -26,7 +26,8 @@ public class HttpHandler implements Runnable{
         HttpResponse response;
         try {
             request=parser.parseRequest(socket);
-            Content data= processor.processRequest(request);
+            System.out.println("received request: "+request);
+            StreamContent data= processor.processRequest(request);
             response = builder.build(data, HttpResponseBuilder.OK,request.getHeader().getVersion());
         } catch (BadRequest e) {
             response= builder.build(HttpResponseBuilder.BAD_REQUEST,e.getVersion());
@@ -37,8 +38,10 @@ public class HttpHandler implements Runnable{
             e.printStackTrace();
             response=builder.build(HttpResponseBuilder.SERVER_ERROR,request.getHeader().getVersion());
         }
+        System.out.println("response: "+response);
         sender.send(response,socket);
         socket.close();
+        System.out.println();
     }
     @Override
     public void run() {

@@ -1,0 +1,3 @@
+/yydza.png->/yydz.png
+
+/yydzb.png=>/yydz.png

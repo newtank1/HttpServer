@@ -9,16 +9,23 @@ import java.net.Socket;
 
 public class ParserImpl implements HttpRequestParser{
     @Override
-    public HttpRequest parseRequest(Socket socket) throws IOException, BadRequest {
-        InputStream reader=new DataInputStream(socket.getInputStream());
-        String requestHeader = readHeader(reader);
-        HttpRequestHeader header=new HttpRequestHeader(requestHeader);
-        String length = header.getAttribute("Content-Length");
-        if("post".equalsIgnoreCase(header.getMethod())&&length==null){
-            throw new BadRequest(header.getVersion());
+    public HttpRequest parseRequest(Socket socket) throws BadRequest {
+        InputStream reader;
+        String requestHeader;
+        try {
+            reader = new DataInputStream(socket.getInputStream());
+            requestHeader = readHeader(reader);
+            HttpRequestHeader header;
+            header=new HttpRequestHeader(requestHeader);
+            String length = header.getAttribute("Content-Length");
+            if("post".equalsIgnoreCase(header.getMethod())&&length==null){
+                throw new BadRequest(header.getVersion());
+            }
+            if(length==null) length="0";
+            return new HttpRequest(header, new String(reader.readNBytes(Integer.parseInt(length))));
+        } catch (IOException e) {
+            throw new BadRequest();
         }
-        if(length==null) length="0";
-        return new HttpRequest(header, new String(reader.readNBytes(Integer.parseInt(length))));
     }
 
     private String readHeader(InputStream inputStream) throws IOException, BadRequest {

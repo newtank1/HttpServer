@@ -7,5 +7,5 @@ import java.net.Socket;
 
 public interface HttpRequestParser {
     String CRLFCRLF="\r\n\r\n";
-    HttpRequest parseRequest(Socket socket) throws IOException, BadRequest;
+    HttpRequest parseRequest(Socket socket) throws BadRequest;
 }

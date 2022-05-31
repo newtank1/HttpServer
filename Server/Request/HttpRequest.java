@@ -12,8 +12,10 @@ public class HttpRequest {
         if("post".equalsIgnoreCase(getMethod())){
             String[] params=data.split("&");
             for (String param : params) {
-                String[] kv=param.split("=");
-                header.putParam(kv[0],kv[1]);
+                if(!param.isEmpty()) {
+                    String[] kv = param.split("=");
+                    header.putParam(kv[0], kv[1]);
+                }
             }
         }
     }

@@ -1,2 +1,2 @@
-Servlet:Server.Servlet.UserServlet
+Servlet:Server.Servlet.StaticServlet
 Port:20000

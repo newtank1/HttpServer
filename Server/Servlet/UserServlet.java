@@ -13,17 +13,17 @@ import java.util.Map;
 public class UserServlet extends HttpServlet{
     public static Map<String,String> accounts=new HashMap<>();
 
-    public void doGet(HttpRequest request, HttpResponse response) throws IOException, HttpException {
+    public void doGet(HttpRequest request, HttpResponse response) throws  HttpException {
         if(request.getUri().equals("/register")){
             String account=request.getParam("account");
             String password=request.getParam("password");
             accounts.put(account,password);
             response.setData(new TextContent("register success, account is "+account+", password is "+password));
-        }else throw new UnsupportedMethod();
+        }else throw new UnsupportedMethod(request.getVersion());
     }
 
 
-    public void doPost(HttpRequest request, HttpResponse response) throws UnsupportedMethod {
+    public void doPost(HttpRequest request, HttpResponse response) throws HttpException {
         if(request.getUri().equals("/login")){
             String account=request.getParam("account");
             String password=request.getParam("password");
@@ -32,6 +32,6 @@ public class UserServlet extends HttpServlet{
             }else {
                 response.setData(new TextContent("login failed"));
             }
-        }else throw new UnsupportedMethod();
+        }else throw new UnsupportedMethod(request.getVersion());
     }
 }

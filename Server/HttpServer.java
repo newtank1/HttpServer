@@ -61,7 +61,9 @@ public final class HttpServer {
                 String[] strs=s.split(":",2);
                 config.put(strs[0],strs[1]);
             }
+            System.out.println("Config loaded");
         } catch (IOException e) {
+            System.err.println("Failed to load Config.txt");
             e.printStackTrace();
         }
     }

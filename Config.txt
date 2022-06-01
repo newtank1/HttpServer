@@ -1,2 +1,3 @@
 Servlet:Server.Servlet.StaticServlet
 Port:20000
+Alive:5

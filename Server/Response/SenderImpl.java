@@ -11,6 +11,5 @@ public class SenderImpl implements HttpResponseSender{
         byte[] dataString = response.getDataBytes();
         dataOutputStream.write(dataString);
         dataOutputStream.flush();
-        dataOutputStream.close();
     }
 }

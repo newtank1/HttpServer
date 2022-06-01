@@ -27,7 +27,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 
@@ -40,15 +42,23 @@ public final class HttpServer {
 
         ServerSocket socket = new ServerSocket(port);
 
-        while (true) {
+        ArrayList<HttpHandler> connections=new ArrayList<>();
 
+
+        while (true) {
             Socket connection = socket.accept();
 
+            connection.setKeepAlive(true);
+
+
             HttpHandler request = new HttpHandler(connection);
+
+            connections.add(request);
 
             Thread thread = new Thread(request);
 
             thread.start();
+
         }
     }
 
@@ -66,5 +76,9 @@ public final class HttpServer {
             System.err.println("Failed to load Config.txt");
             e.printStackTrace();
         }
+    }
+
+    public static String getConfig(String key){
+        return config.get(key);
     }
 }

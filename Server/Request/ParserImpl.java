@@ -11,7 +11,7 @@ public class ParserImpl implements HttpRequestParser{
     @Override
     public HttpRequest parseRequest(Socket socket) throws BadRequest {
         InputStream reader;
-        String requestHeader;
+        String requestHeader = null;
         try {
             reader = new DataInputStream(socket.getInputStream());
             requestHeader = readHeader(reader);
@@ -24,6 +24,7 @@ public class ParserImpl implements HttpRequestParser{
             if(length==null) length="0";
             return new HttpRequest(header, new String(reader.readNBytes(Integer.parseInt(length))));
         } catch (IOException e) {
+            //e.printStackTrace();
             throw new BadRequest();
         }
     }

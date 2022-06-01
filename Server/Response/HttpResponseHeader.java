@@ -14,6 +14,7 @@ public class HttpResponseHeader {
         put(200,"OK");
         put(301,"FOUND");
         put(302,"MOVED PERMANENTLY");
+        put(304,"NOT MODIFIED");
         put(404,"NOT FOUND");
         put(400,"BAD REQUEST");
         put(405,"UNSUPPORTED METHOD");

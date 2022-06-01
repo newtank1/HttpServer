@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class StreamContent extends Content{
-    public InputStream data;
+    private final InputStream data;
+    private final long lastModified;
 
-    public StreamContent(String type, InputStream data) {
+    public StreamContent(String type, InputStream data, long lastModified) {
         this.type = type;
         this.data = data;
+        this.lastModified=lastModified;
     }
 
     public byte[] readData() throws IOException {
@@ -18,6 +20,11 @@ public class StreamContent extends Content{
     public byte[] readData(int len) throws IOException {
         return data.readNBytes(len);
     }
+
+    public long getLastModified() {
+        return lastModified;
+    }
+
     public int getLength(){
         try {
             return data.available();

@@ -1,13 +1,11 @@
 package Server.Servlet;
 
-import Server.Exceptions.HttpException;
-import Server.Exceptions.NotFound;
 import Server.Content.StreamContent;
 import Server.Content.StreamContentFactory;
+import Server.Exceptions.HttpException;
 import Server.Request.HttpRequest;
 import Server.Response.HttpResponse;
-
-import java.io.IOException;
+import Server.Utils.DateUtil;
 
 public class StaticServlet extends HttpServlet{
     @Override
@@ -16,6 +14,9 @@ public class StaticServlet extends HttpServlet{
         StreamContent content = null;
         content = factory.createContent(request);
         response.setData(content);
+        DateUtil dateUtil=new DateUtil();
+        String lastModified= dateUtil.longToDate(content.getLastModified());
+        response.setAttribute("Last-Modified",lastModified);
         response.setStatus(200);
     }
 

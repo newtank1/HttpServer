@@ -44,6 +44,10 @@ public class HttpRequest {
         return header.getParam(key);
     }
 
+    public String getAttribute(String key){
+        return header.getAttribute(key);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb=new StringBuilder();

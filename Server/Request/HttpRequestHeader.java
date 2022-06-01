@@ -31,7 +31,7 @@ public class HttpRequestHeader {
                 }
             }
             for(int i=1;i< lines.length;i++){
-                String[] attr=lines[i].split(":");
+                String[] attr=lines[i].split(":",2);
                 attributes.put(attr[0].strip().toLowerCase(),attr[1].strip());
             }
         }catch (RuntimeException e){

@@ -28,7 +28,15 @@ public class DateUtil {
     }
 
     public long dateToLong(String date) throws ParseException {
-        return new SimpleDateFormat(useDateFormat,Locale.ENGLISH).parse(date).getTime();
+        try {
+            return new SimpleDateFormat(DATE_FORMAT_A,Locale.ENGLISH).parse(date).getTime();
+        } catch (ParseException e) {
+            try {
+                return new SimpleDateFormat(DATE_FORMAT_B,Locale.ENGLISH).parse(date).getTime();
+            } catch (ParseException ex) {
+                return new SimpleDateFormat(DATE_FORMAT_C,Locale.ENGLISH).parse(date).getTime();
+            }
+        }
     }
 
     public String getFormat(){

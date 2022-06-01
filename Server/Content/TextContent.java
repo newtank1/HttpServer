@@ -1,6 +1,5 @@
-package Server.Model;
+package Server.Content;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public class TextContent extends Content{

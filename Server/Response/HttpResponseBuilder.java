@@ -1,6 +1,6 @@
 package Server.Response;
 
-import Server.Model.StreamContent;
+import Server.Content.StreamContent;
 
 public interface HttpResponseBuilder {
     int OK=200;

@@ -1,6 +1,6 @@
 package Server.Response;
 
-import Server.Model.StreamContent;
+import Server.Content.StreamContent;
 
 public class BuilderImpl implements HttpResponseBuilder{
 

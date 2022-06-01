@@ -12,6 +12,8 @@ public class HttpResponseHeader {
 
     public final Map<Integer,String> statusMap=new HashMap<>(){{
         put(200,"OK");
+        put(301,"FOUND");
+        put(302,"MOVED PERMANENTLY");
         put(404,"NOT FOUND");
         put(400,"BAD REQUEST");
         put(405,"UNSUPPORTED METHOD");

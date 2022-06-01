@@ -38,7 +38,7 @@ public class RedirectTable {
         }
     }
 
-    public RedirectTable getTable(){
+    public static RedirectTable getTable(){
         return table;
     }
 
@@ -53,4 +53,5 @@ public class RedirectTable {
         if(temporaryTable.containsKey(uri)) return Optional.of(temporaryTable.get(uri));
         return Optional.empty();
     }
+
 }

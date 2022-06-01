@@ -7,6 +7,7 @@ import Server.Response.HttpResponseBuilder;
 public abstract class HttpException extends Exception{
 
     protected String version;
+
     protected final HttpResponseBuilder builder=new BuilderImpl();
 
     public HttpException(String version) {

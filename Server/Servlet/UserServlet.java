@@ -2,11 +2,10 @@ package Server.Servlet;
 
 import Server.Exceptions.HttpException;
 import Server.Exceptions.UnsupportedMethod;
-import Server.Model.TextContent;
+import Server.Content.TextContent;
 import Server.Request.HttpRequest;
 import Server.Response.HttpResponse;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

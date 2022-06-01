@@ -1,4 +1,4 @@
-package Server.Model;
+package Server.Content;
 
 import java.io.IOException;
 import java.io.InputStream;

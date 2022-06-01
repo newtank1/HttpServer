@@ -1,6 +1,6 @@
 package Server.Response;
 
-import Server.Model.Content;
+import Server.Content.Content;
 
 import java.io.IOException;
 

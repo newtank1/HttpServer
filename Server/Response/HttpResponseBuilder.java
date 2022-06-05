@@ -2,14 +2,20 @@ package Server.Response;
 
 import Server.Content.StreamContent;
 
-public interface HttpResponseBuilder {
-    int OK=200;
-    int NOT_FOUND=404;
-    int SERVER_ERROR=500;
-    int BAD_REQUEST=400;
-    int UNSUPPORTED_METHOD=405;
+public class HttpResponseBuilder {
+    public static final int OK=200;
 
-    HttpResponse build(StreamContent data, int status, String version);
+    public HttpResponse build(StreamContent data, int status, String version) {
+        HttpResponseHeader header=new HttpResponseHeader(version,status);
+        HttpResponse response=new HttpResponse(header,data);
+        if (data != null) {
+            header.putAttribute("Content-Length", String.valueOf(data.getLength()));
+            header.putAttribute("Content-Type", data.getType());
+        }
+        return response;
+    }
 
-    HttpResponse build(int status,String version);
+    public HttpResponse build(int status, String version) {
+        return build(null,status,version);
+    }
 }

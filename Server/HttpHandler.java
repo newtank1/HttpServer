@@ -14,8 +14,8 @@ public class HttpHandler implements Runnable{
 
     Socket socket;
     private long endTime;
-    private final HttpRequestParser parser=new ParserImpl();
-    private final HttpResponseSender sender=new SenderImpl();
+    private final HttpRequestParser parser=new HttpRequestParser();
+    private final HttpResponseSender sender=new HttpResponseSender();
     private final HttpServlet servlet;
 
     public HttpHandler(Socket socket) {
@@ -70,11 +70,13 @@ public class HttpHandler implements Runnable{
         } catch (HttpException e) {
             response= e.buildResponse();
         }
+        System.out.println(request);
         long nowTime=System.currentTimeMillis();
         String isAlive = null;
         if (request != null) {
             isAlive=request.getAttribute("Connection");
         }
+        System.out.println(response);
         if(response!=null) {
             if("keep-alive".equalsIgnoreCase(isAlive)) {
                 if (nowTime >= endTime) {
@@ -86,7 +88,7 @@ public class HttpHandler implements Runnable{
             }
             sender.send(response, socket);
         }
-        if(!socket.isClosed()&&(nowTime>=endTime||"close".equalsIgnoreCase(isAlive))) {
+        if(!socket.isClosed()&&(nowTime>=endTime||!"keep-alive".equalsIgnoreCase(isAlive))) {
             socket.close();
         }
     }

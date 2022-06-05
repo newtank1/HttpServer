@@ -1,6 +1,5 @@
 package Server.Exceptions;
 
-import Server.Response.BuilderImpl;
 import Server.Response.HttpResponse;
 
 public class UnsupportedMethod extends HttpException {

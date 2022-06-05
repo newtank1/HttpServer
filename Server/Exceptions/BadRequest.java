@@ -1,8 +1,6 @@
 package Server.Exceptions;
 
-import Server.Response.BuilderImpl;
 import Server.Response.HttpResponse;
-import Server.Response.HttpResponseBuilder;
 
 public class BadRequest extends HttpException{
 

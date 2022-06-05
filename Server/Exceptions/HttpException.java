@@ -1,6 +1,5 @@
 package Server.Exceptions;
 
-import Server.Response.BuilderImpl;
 import Server.Response.HttpResponse;
 import Server.Response.HttpResponseBuilder;
 
@@ -8,7 +7,7 @@ public abstract class HttpException extends Exception{
 
     protected String version;
 
-    protected final HttpResponseBuilder builder=new BuilderImpl();
+    protected final HttpResponseBuilder builder=new HttpResponseBuilder();
 
     public HttpException(String version) {
         this.version = version;

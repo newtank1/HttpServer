@@ -1,3 +1,4 @@
 /yydza.png->/yydz.png
-
+/index1.html->/index.html
 /yydzb.png=>/yydz.png
+/index2.html=>/index.html

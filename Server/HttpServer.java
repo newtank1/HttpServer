@@ -1,25 +1,4 @@
-package Server;//import java.io.BufferedInputStream;
-//import java.io.IOException;
-//import java.io.InputStream;
-//import java.io.PrintWriter;
-//import java.net.ServerSocket;
-//import java.net.Socket;
-//
-//public class Server.HttpServer {
-//
-//    public static void main(String[] args) throws IOException {
-//        try (ServerSocket socket = new ServerSocket(20000)) {
-//            System.out.println("listening");
-//            while (true){
-//                Socket client=socket.accept();
-//                System.out.println("accepted: "+client);
-//                HttpRequest httpRequest=new HttpRequest(client);
-//                Thread thread=new Thread(httpRequest);
-//                thread.start();
-//            }
-//        }
-//    }
-//}
+package Server;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -29,7 +8,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 

@@ -9,6 +9,10 @@ import Server.Response.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+* 一个支持用户注册和登录的Servlet，数据存储在内存中。
+* */
+
 public class UserServlet extends HttpServlet{
     public static Map<String,String> accounts=new HashMap<>();
 

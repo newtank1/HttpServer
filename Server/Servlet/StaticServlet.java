@@ -7,6 +7,10 @@ import Server.Request.HttpRequest;
 import Server.Response.HttpResponse;
 import Server.Utils.DateUtil;
 
+/**
+* 默认的Servlet，只是简单的获取文件并返回。
+* */
+
 public class StaticServlet extends HttpServlet{
     @Override
     public void doGet(HttpRequest request, HttpResponse response) throws HttpException {

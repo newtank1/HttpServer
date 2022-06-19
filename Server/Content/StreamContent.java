@@ -3,6 +3,9 @@ package Server.Content;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+* 主要用于文件读取
+* */
 public class StreamContent extends Content{
     private final InputStream data;
     private final long lastModified;

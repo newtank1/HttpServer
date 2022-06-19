@@ -2,6 +2,10 @@ package Server.Content;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+* 纯文本Content
+* */
+
 public class TextContent extends Content{
     String text;
 

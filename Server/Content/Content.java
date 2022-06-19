@@ -2,6 +2,9 @@ package Server.Content;
 
 import java.io.IOException;
 
+/**
+* 表示响应报文中Content的基类
+* */
 public abstract class Content {
     public String type;
 

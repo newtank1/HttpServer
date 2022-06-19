@@ -2,6 +2,10 @@ package Server.Response;
 
 import Server.Content.StreamContent;
 
+/*
+* 直接构建完整响应，用于非200状态的场合
+* */
+
 public class HttpResponseBuilder {
     public static final int OK=200;
 

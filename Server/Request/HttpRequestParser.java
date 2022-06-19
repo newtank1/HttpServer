@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
+/**
+* 从socket读取报文，构建Http请求头和请求体
+* */
+
 public class HttpRequestParser {
     String CRLFCRLF="\r\n\r\n";
 
@@ -31,7 +35,7 @@ public class HttpRequestParser {
 
     private String readHeader(InputStream inputStream) throws IOException, BadRequest {
         StringBuilder bytes=new StringBuilder();
-        while (bytes.length()<4||!CRLFCRLF.equals(bytes.substring(bytes.length()-4,bytes.length()))){
+        while (bytes.length()<4||!CRLFCRLF.equals(bytes.substring(bytes.length()-4,bytes.length()))){  //截取\r\n\r\n
             bytes.append((char) inputStream.read());
             if(bytes.length()>8192) {
                 HttpRequestHeader header=new HttpRequestHeader(bytes.toString());

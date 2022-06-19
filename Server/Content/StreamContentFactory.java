@@ -8,12 +8,15 @@ import Server.Utils.DateUtil;
 import java.io.*;
 import java.text.ParseException;
 
+/**
+* 根据请求url获取文件的类
+* */
 public class StreamContentFactory {
     public StreamContent createContent(HttpRequest request) throws HttpException {
         String uri=request.getUri();
         InputStream bytes= null;
         RedirectTable redirectTable=RedirectTable.getTable();
-        switch (redirectTable.getStatus(uri)){
+        switch (redirectTable.getStatus(uri)){  //301，302
             case RedirectTable.TEMPORARY_MOVED:throw new Found(request.getVersion(),redirectTable.getRedirection(uri).get());
             case RedirectTable.PERMANENT_MOVED:throw new MovedPermanently(request.getVersion(),redirectTable.getRedirection(uri).get());
         }
@@ -31,11 +34,12 @@ public class StreamContentFactory {
             try {
                 long cacheTime=dateUtil.dateToLong(ifModified);
                 if(cacheTime>=lastModified)
-                    throw new NotModified(request.getVersion());
+                    throw new NotModified(request.getVersion());  //304
             } catch (ParseException ignored) {
 
             }
         }
+        //根据url扩展名选择Content-Type
         if(uri.endsWith(".txt")){
             return new StreamContent("text/plain",bytes,lastModified);
         }

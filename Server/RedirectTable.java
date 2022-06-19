@@ -8,6 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+* 用于支持301、302的重定向表，表内容从Redirect.txt获取
+* 数据格式：
+* a->b，表示301移动
+* a=>b，表示302移动
+* */
+
+
 public class RedirectTable {
     private static final RedirectTable table=new RedirectTable();
     private final Map<String,String> temporaryTable=new HashMap<>();

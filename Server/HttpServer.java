@@ -10,31 +10,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * 服务器类，用于创建连接
+* */
 public final class HttpServer {
     public static Map<String,String> config;
 
     public static void main(String[] argv) throws Exception {
-        // Get the port number from the config.
         int port = Integer.parseInt(config.getOrDefault("Port","80"));
-
         ServerSocket socket = new ServerSocket(port);
-
         ArrayList<HttpHandler> connections=new ArrayList<>();
-
-
         while (true) {
             Socket connection = socket.accept();
-
             connection.setKeepAlive(true);
-
-
             HttpHandler request = new HttpHandler(connection);
-
             connections.add(request);
-
             Thread thread = new Thread(request);
-
             thread.start();
 
         }
@@ -42,7 +33,7 @@ public final class HttpServer {
 
     static {
         try {
-            BufferedReader reader=new BufferedReader(new InputStreamReader(new FileInputStream("Config.txt")));
+            BufferedReader reader=new BufferedReader(new InputStreamReader(new FileInputStream("Config.txt")));//读配置
             String s;
             config=new HashMap<>();
             while ((s= reader.readLine())!=null){
